@@ -3,7 +3,7 @@
 const NF = {
   A2: 110, C3: 130.81, D3: 146.83, E3: 164.81, F3: 174.61, G3: 196, Ab3: 207.65, A3: 220, Bb3: 233.08, B3: 246.94,
   C4: 261.63, D4: 293.66, Eb4: 311.13, E4: 329.63, F4: 349.23, Fs4: 369.99, G4: 392, Ab4: 415.3, A4: 440, Bb4: 466.16, B4: 493.88,
-  C5: 523.25, D5: 587.33, Eb5: 622.25, E5: 659.25, F5: 698.46, Fs5: 739.99, G5: 783.99, A5: 880, B5: 987.77, C6: 1046.5,
+  C5: 523.25, D5: 587.33, Eb5: 622.25, E5: 659.25, F5: 698.46, Fs5: 739.99, G5: 783.99, Ab5: 830.61, A5: 880, Bb5: 932.33, B5: 987.77, C6: 1046.5, D6: 1174.66,
 };
 
 const OVERWORLD_MEL = [
@@ -119,7 +119,7 @@ export class SoundEngine {
   }
 
   _tone({ freq, freqEnd = null, type = 'square', dur = 0.12, vol = 0.15, delay = 0 }) {
-    if (!this.ctx || !this.master || this.muted) return;
+    if (!this.ctx || !this.master || this.muted || !Number.isFinite(freq)) return;
     const now = this.ctx.currentTime + delay;
     const osc = this.ctx.createOscillator();
     const g = this.ctx.createGain();
